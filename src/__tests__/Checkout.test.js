@@ -10,16 +10,28 @@ describe('Checkout', () => {
         expect(testCheckout).toHaveProperty('scan');
         expect(testCheckout).toHaveProperty('getTotalPrice');
     })
-    test('Scan method adds the scanned item to the checkoutList string', () => {
+})
+
+describe('scan', () => {
+    test('scan method adds the scanned item to the checkoutList string', () => {
         const testCheckout = new Checkout({a:{price: 30, specialPrice:{quantity:2, price: 50}}});
         testCheckout.scan('B')
 
         expect(testCheckout.checkoutList).toBe('B')
     })
-    test('Scan method will only accept single capital string characters', () => {
+    test('scan method will only accept single capital string characters', () => {
         const testCheckout = new Checkout({a:{price: 30, specialPrice:{quantity:2, price: 50}}});
         testCheckout.scan('b')
 
         expect(testCheckout.checkoutList).not.toBe('b')
+    })
+})
+
+describe('getTotalPrice', () => {
+    test('getTotalPrice returns 0 when there is no items  have been scanned', () => {
+        const testCheckout = new Checkout({a:{price: 30, specialPrice:{quantity:2, price: 50}}});
+        const totalPrice = testCheckout.getTotalPrice();
+
+        expect(totalPrice).toBe(0)
     })
 })

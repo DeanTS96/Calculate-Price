@@ -9,7 +9,7 @@ class Checkout {
         }
     }
     getTotalPrice() {
-
+        if(!this.checkoutList.length) return 0;
     }
 }
 
