@@ -10,7 +10,11 @@ class Checkout {
     }
     getTotalPrice() {
         if(!this.checkoutList.length) return 0;
-        return this.pricing[this.checkoutList[0]].price
+        let total = 0;
+        for(const char of this.checkoutList){
+            total += this.pricing[char].price
+        }
+        return total
     }
 }
 

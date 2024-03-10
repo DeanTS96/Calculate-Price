@@ -14,13 +14,13 @@ describe('Checkout', () => {
 
 describe('scan', () => {
     test('scan method adds the scanned item to the checkoutList string', () => {
-        const testCheckout = new Checkout({B:{price: 30, specialPrice:{quantity:2, price: 50}}});
+        const testCheckout = new Checkout({B:{price: 30}});
         testCheckout.scan('B')
 
         expect(testCheckout.checkoutList).toBe('B')
     })
     test('scan method will only accept single capital string characters', () => {
-        const testCheckout = new Checkout({B:{price: 30, specialPrice:{quantity:2, price: 50}}});
+        const testCheckout = new Checkout({B:{price: 30}});
         testCheckout.scan('b')
 
         expect(testCheckout.checkoutList).not.toBe('b')
@@ -29,16 +29,25 @@ describe('scan', () => {
 
 describe('getTotalPrice', () => {
     test('getTotalPrice returns 0 when there is no items  have been scanned', () => {
-        const testCheckout = new Checkout({A:{price: 30, specialPrice:{quantity:2, price: 50}}});
+        const testCheckout = new Checkout({A:{price: 30}});
         const totalPrice = testCheckout.getTotalPrice();
 
         expect(totalPrice).toBe(0)
     })
     test('getTotalPrice returns correct price when one item has been scanned', () => {
-        const testCheckout = new Checkout({A:{price: 30, specialPrice:{quantity:2, price: 50}}});
+        const testCheckout = new Checkout({A:{price: 30}});
         testCheckout.scan("A")
         const totalPrice = testCheckout.getTotalPrice();
 
         expect(totalPrice).toBe(30)
+    })
+    test('getTotalPrice returns correct price when multiple items have been scanned', () => {
+        const testCheckout = new Checkout({A:{price: 30}});
+        testCheckout.scan("A")
+        testCheckout.scan("A")
+        testCheckout.scan("A")
+        const totalPrice = testCheckout.getTotalPrice();
+
+        expect(totalPrice).toBe(90)
     })
 })
