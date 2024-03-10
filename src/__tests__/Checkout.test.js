@@ -42,12 +42,23 @@ describe('getTotalPrice', () => {
         expect(totalPrice).toBe(30)
     })
     test('getTotalPrice returns correct price when multiple items have been scanned', () => {
-        const testCheckout = new Checkout({A:{price: 30}});
+        const testCheckout = new Checkout({A:{price: 30}, B:{price: 50}});
         testCheckout.scan("A")
+        testCheckout.scan("B")
+        testCheckout.scan("A")
+        const totalPrice = testCheckout.getTotalPrice();
+
+        expect(totalPrice).toBe(110)
+    })
+    test('getTotalPrice returns correct price when 2 items meet a special price criteria', () => {
+        const testCheckout = new Checkout({
+            A:{price: 30, specialPrice: {quantity: 2, price: 40}}, 
+            B:{price: 50}
+        });
         testCheckout.scan("A")
         testCheckout.scan("A")
         const totalPrice = testCheckout.getTotalPrice();
 
-        expect(totalPrice).toBe(90)
+        expect(totalPrice).toBe(40)
     })
 })
