@@ -25,6 +25,15 @@ describe('scan', () => {
 
         expect(testCheckout.checkoutList).not.toBe('b')
     })
+    test('scan throws an error with the message "Scanned item does not have a price" when the item doesn\'t have a price on the passed prices object', () => {
+        const testCheckout = new Checkout({
+            A:{price: 30, specialPrice: {quantity: 3, price: 50}}, 
+            B:{price: 50, specialPrice: {quantity: 2, price: 80}}, 
+            C:{price: 20}
+        });
+
+        expect(() => testCheckout.scan("Z")).toThrow("Scanned item does not have a price")
+    })
 })
 
 describe('getTotalPrice', () => {

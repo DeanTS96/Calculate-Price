@@ -5,6 +5,9 @@ class Checkout {
     }
     scan(item) {
         if(/^[A-Z]$/.test(item)){
+            if(!this.pricing[item]){
+                throw new Error('Scanned item does not have a price');
+            }
             this.checkoutList += item;
         }
     }
@@ -12,7 +15,7 @@ class Checkout {
         let total = 0;
         const itemQuantities = {}
         for(const char of this.checkoutList){
-            const {specialPrice, price} = this.pricing[char];
+            const {price, specialPrice} = this.pricing[char];
             itemQuantities[char] = (itemQuantities[char] || 0) + 1;
             total += price;
             if(specialPrice && itemQuantities[char] === specialPrice.quantity){
