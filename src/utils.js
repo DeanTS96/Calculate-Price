@@ -10,6 +10,7 @@ class Checkout {
     }
     getTotalPrice() {
         if(!this.checkoutList.length) return 0;
+        return this.pricing[this.checkoutList[0]].price
     }
 }
 
