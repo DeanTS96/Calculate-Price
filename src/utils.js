@@ -3,11 +3,11 @@ class Checkout {
         this.checkoutList = '';
         this.pricing = pricing;
     }
-    scan() {
-
+    scan(item) {
+        this.checkoutList += item;
     }
     getTotalPrice() {
-        
+
     }
 }
 

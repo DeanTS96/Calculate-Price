@@ -10,4 +10,10 @@ describe('Checkout', () => {
         expect(testCheckout).toHaveProperty('scan');
         expect(testCheckout).toHaveProperty('getTotalPrice');
     })
+    test('Scan method adds the scanned item to the checkoutList string', () => {
+        const testCheckout = new Checkout({a:{price: 30, specialPrice:{quantity:2, price: 50}}});
+        testCheckout.scan('B')
+
+        expect(testCheckout.checkoutList).toBe('B')
+    })
 })
