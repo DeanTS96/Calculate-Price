@@ -16,4 +16,10 @@ describe('Checkout', () => {
 
         expect(testCheckout.checkoutList).toBe('B')
     })
+    test('Scan method will only accept single capital string characters', () => {
+        const testCheckout = new Checkout({a:{price: 30, specialPrice:{quantity:2, price: 50}}});
+        testCheckout.scan('b')
+
+        expect(testCheckout.checkoutList).not.toBe('b')
+    })
 })

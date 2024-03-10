@@ -4,7 +4,9 @@ class Checkout {
         this.pricing = pricing;
     }
     scan(item) {
-        this.checkoutList += item;
+        if(/^[A-Z]$/.test(item)){
+            this.checkoutList += item;
+        }
     }
     getTotalPrice() {
 
