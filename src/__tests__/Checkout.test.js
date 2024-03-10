@@ -1,4 +1,4 @@
-import Checkout from '../utils'
+import Checkout from '../Checkout'
 
 describe('Checkout', () => {
     test('Checkout class has the correct properties and methods, and constructs the correct pricing property', () => {
